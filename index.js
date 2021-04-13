@@ -45,12 +45,15 @@ Use the copy function below to do the following:
     2. Return a copy of the received array  
 */
 
-function copy(/*your code here*/){
-    /*your code here*/
+function copy(originalFlavors){
+    let arrayOut = [];
+    let size = originalFlavors.length;
+    for (let i=0; i < size; i++) {
+        arrayOut.push(originalFlavors[i]);
+    }
+
+    return originalFlavors;
 }    
-
-
-
 
 
 /*🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -64,8 +67,8 @@ For Example: is31Flavors(originalFlavors) will return true if your code is worki
 */
 
 
-function is31Flavors(/*your code here*/){
-   /*your code here*/
+function is31Flavors(inArray){
+   return (inArray.length === 31);
 }
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -81,8 +84,10 @@ Use the addFlavor function below to do the following:
 */
 
 
-function addFlavor(/*your code here*/){
-   /*your code here*/
+function addFlavor(inArray, neoFlavor){
+   inArray.unshift(neoFlavor);
+
+   return inArray;
 }
 
 
@@ -97,8 +102,10 @@ Use the removeLastFlavor function below to do the following:
     For example: running removeLastFlavor(originalFlavors) would return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla"]
 */
 
-function removeLastFlavor(/*your code here*/){
-   /*your code here*/
+function removeLastFlavor(inArray){
+   inArray.pop();
+
+   return inArray;
 }
 
 
@@ -114,8 +121,10 @@ Use the getFlavorByIndex function below to do the following:
     For example: running getFlavorByIndex(originalFlavors, 2) would return "Black Walnut", assuming Rainbow Sherbert has been added successfully
 */
 
-function getFlavorByIndex(/*your code here*/){
-    /*your code here*/
+function getFlavorByIndex(inArray, index){
+    let flavorAtIndex = inArray[index];
+
+    return flavorAtIndex;
 }
 
 
@@ -134,8 +143,15 @@ Use the removeFlavorByName function below to do the following:
     HINT: You can use .splice() for this
 */
 
-function removeFlavorByName(/*your code here*/){
-    /*your code here*/
+function removeFlavorByName(inArray, flavortoRemove){
+    let size = inArray.length;
+    for (let i=0; i< size; i++) {
+        if (inArray[i] === flavortoRemove) {
+            inArray.splice(i, 1);
+        }
+    }
+
+    return inArray;
 }
 
 
@@ -160,8 +176,16 @@ Use the filterByWord function below to do the following:
     DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem. 
 */
 
-function filterByWord(/*your code here*/){
-    /*your code here*/
+function filterByWord(inArray, searchFor){
+    let size = inArray.length;
+    let outArray = [];
+    for (let i = 0; i < size; i++) {
+        if (inArray[i].includes(searchFor)) {
+            outArray.push(inArray[i]);
+        }
+    }
+
+    return outArray;
 }
 
 
@@ -177,8 +201,16 @@ Use the getAverageWordLength function below to do the following:
     For example: getAverageWordLength(originalFlavors) should return a number between 0 and 3.     
 */
 
-function getAverageWordLength(/*code here*/){
-    /*code here*/
+function getAverageWordLength(inArray){
+    let size = inArray.length;
+    let words = 0;
+
+    for (let i = 0; i < size; i++) {
+        let rawString = inArray[i];
+        words += rawString.split(' ').length;
+   }
+    
+    return words/size;
 }
 
 
@@ -187,16 +219,29 @@ Baskin Robins now offers new flavors, seasonal flavors, and even regional flavor
 from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors and store it in an array called randomFlavors.
 
 Use the getRandomFlavors function and new arrays below to do the following:
-    1. Receive the four arrays with all the differnet flavors (originalFlavors is above, the others are below)
+    1. Receive the four arrays with all the different flavors (originalFlavors is above, the others are below)
     2. Randomly pick flavors from all four arrays
-    3. Return a new array called randomFlavors that has a lenght of 31
+    3. Return a new array called randomFlavors that has a length of 31
 
     For example: getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors) might return ["Strawberry Cheesecake", "Eggnog,"..."Chocolate"].
 */
 
 
-function getRandomFlavors(/*code here*/){
-    /*code here*/
+function getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors){
+    let massList = originalFlavors.push(newFlavors).push(seasonalFlavors).push(regionalFlavors);
+    let massSize = massList.length;
+    let arrayOut = [];
+
+    for (let flavors = 0; flavors < 31; flavors++) {
+        let randomI = Math.floor(math.random() * massSize);
+        if (arrayOut.includes(massList[randomI]) ) {
+            flavors--; /* do not add duplicates */
+        } else {
+            arrayOut.push(massList[randomI]);
+        }
+    }
+
+    return arrayOut;
 }
 
 // NEW DATA ARRAYS FOR STRETCH 2 ⬇️
